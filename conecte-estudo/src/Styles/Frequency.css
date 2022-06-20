@@ -1,0 +1,87 @@
+.frequencyContainer {
+    justify-content: center;
+    background-color: #F6F4FF;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+}
+
+.br-8px-tr {
+    border-radius: 8px 0px 0px 0px;
+}
+
+.br-8px-tl {
+    border-radius: 0px 8px 0px 0px;
+}
+
+.br-8px-br {
+    border-radius: 0px 0px 0px 8px;
+}
+
+.br-8px-bl {
+    border-radius: 0px 0px 8px 0px;
+}
+
+.frequencyTableHeader {
+    background-color: #482BD9;
+    border-radius: 8px 8px 0px 0px;
+    width: 100%;
+    height: 50px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: 0.03em;
+    text-transform: capitalize;
+    color: #FFFFFF;
+}
+
+.w-80 {
+    width: 80%;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.frequencyTable {
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
+}
+
+.frequencyTableBody {
+    background-color: #EDEDED;
+    border-radius: 8px;
+    height: 50px;
+}
+
+.frequencyTableBodyColumn {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+    text-align: center;
+    color: #424242;
+}
+
+.goToClassWorkButton {
+    background: #3B25A8;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    margin: 15px 0;
+    padding: 10px 15px;
+}
+
+.classWorkButtonContainer{
+    display: flex;
+    width: 80%;
+    justify-content: start;
+}

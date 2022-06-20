@@ -1,0 +1,185 @@
+.addEventButton {
+  width: 190px;
+  height: 36px;
+  left: 1211px;
+  top: 150px;
+  background: #3B25A8;
+  border-radius: 4px;
+  color: #FFF;
+  margin: 25px 25px 0;
+  border: none;
+}
+
+.cancelAddEventButton{
+  width: 190px;
+  height: 36px;
+  left: 1211px;
+  top: 150px;
+  background: #F5F5F5;
+  border-radius: 4px;
+  color: #C2C2C2;
+  margin: 25px 25px 0;
+  border: 1px solid #C2C2C2;
+}
+
+.addEventButton:hover, .cancelAddEventButton:hover{
+  cursor: pointer;
+}
+
+.buttonContainer {
+  width: 100%;
+  text-align: end;
+}
+
+.day {
+  display: flex;
+  justify-content: space-between;
+  color: #424242;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  text-align: start;
+  padding: 10px 30px 0;
+}
+
+.eventCard {
+  background-color: #EBF8EC;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  color: #757575;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.eventTime {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #757575;
+}
+
+.eventTitle {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #007505;
+}
+
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #F6F4FF;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  height: 100%;
+  width: 100%;
+}
+
+.month {
+  color: #424242;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 44px;
+  letter-spacing: 0.015em;
+  text-align: start;
+  padding: 30px 30px 0;
+}
+
+.navigation {}
+
+.schedule {
+  margin-top: 20px;
+  height: 100%;
+  width: 100%;
+}
+
+.scheduleContainer {
+  height: 100%;
+  width: 100%;
+  margin: 10px;
+  background: #F6F4FF;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 24px;
+  overflow: scroll;
+}
+
+.scheduleDay {
+  font-weight: 400;
+}
+
+.scheduleWeek {
+  color: #FFF;
+  background: #482BD9;
+  border-radius: 8px 8px 0px 0px;
+  height: 40px;
+}
+
+.weeklyEvents {
+  height: 100px;
+}
+
+.width4 {
+  width: 4%;
+}
+
+.width16 {
+  width: 16%;
+}
+
+.modalTitle {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 44px;
+  color: #482BD9;
+}
+
+.modalSectionTitle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #424242;
+}
+
+.modalSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalSectionTextarea {
+  background: #FFFFFF;
+  border: 1px solid #C2C2C2;
+  border-radius: 4px;
+  resize: none;
+  font-size: 18px;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.modalSectionTitle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #424242;
+}
+
+.modalSectionInput{
+  background: #FFFFFF;
+  border: 1px solid #C2C2C2;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  height: 30px;
+  font-size: 18px;
+}
+
+.modalButtonContainer{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
