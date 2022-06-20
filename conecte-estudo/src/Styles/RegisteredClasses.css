@@ -1,0 +1,52 @@
+.classMaterialsContainer {
+    justify-content: center;
+    background-color: #F6F4FF;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+}
+
+.classesContainer {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 80%;
+}
+
+.classCard {
+    margin: 50px;
+    background-color: rgba(0, 101, 193, 0.56);
+    border-radius: 8px;
+    border: none;
+    width: 400px;
+    color: #FFF;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    padding: 100px 0;
+}
+
+.classCard:hover{
+    cursor: pointer;
+}
+
+.titleContainer {
+    margin: 50px 0 10px;
+    width: 80%;
+    text-align-last: left;
+}
+
+.title {
+    width: 100%;
+    text-align: start;
+}
+
+.outerContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,98 @@
+a{
+  text-decoration: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: -50px;
+}
+
+.formInput{
+  border: 2px solid #D8D0FF;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.formTitle {
+  color: #482BD9;
+  font-size: 22px;
+  font-weight: 500;
+  padding-bottom: 50px;
+}
+
+.labelStyle {
+  color: #424242;
+  font-size: 13px;
+  font-weight: 400;
+  text-align: start;
+  margin-bottom: 5px;
+}
+
+.leftContainer {
+  height: 100%;
+  width: 50%;
+}
+
+.lineBox {
+  border: 1px solid #c4c4c4;
+  height: 450px;
+  margin-top: 30px;
+}
+
+.loginButton{
+  margin: 25px 0 20px;
+  background-color: #482BD9;
+  color: #FFF;
+  padding: 10px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+}
+
+.loginPageContainer {
+  display: flex;
+  justify-content: center;
+  background-color: #F6F4FF;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  height: 100%;
+  width: 100%;
+}
+
+.mainContainer{
+  width: 70%;
+}
+
+.passRule{
+  font-size: 11px;
+  margin: -18px 0 20px;
+  color: #757575;
+  text-align: start;
+}
+
+.register{
+  text-align: start;
+  color:#424242;
+  font-size: 13px;
+}
+
+.rightContainer {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  border-left: 1px solid #c4c4c4;
+  justify-content: center;
+}

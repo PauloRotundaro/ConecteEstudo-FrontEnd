@@ -1,0 +1,75 @@
+.WorkDetailsContainer {
+    justify-content: center;
+    background-color: #F6F4FF;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+}
+
+.outerContainer {
+    width: 100%;
+}
+
+.WorkDetailsTitleContainer {
+    margin: 50px 0 30px;
+    width: 80%;
+    text-align: start;
+}
+
+.deadLineContainer {
+    width: 80%;
+    text-align: start;
+    margin: 0 0 30px;
+}
+
+.dueDate {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+    color: #424242;
+}
+
+.descriptionContainer,
+.materialContainer,
+.myJobContainer {
+    width: 80%;
+    text-align: start;
+    margin-bottom: 30px;
+}
+
+.descriptionTitle {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    color: #424242;
+    margin-bottom: 10px;
+}
+
+.descriptionContent {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+    color: #424242;
+}
+
+.submitWorkButton {
+    width: 285px;
+    height: 49px;
+    left: 547px;
+    top: 845px;
+    background: #482BD9;
+    border-radius: 4px;
+    color: #FFF;
+    border: none;
+}
+
+.submitWorkButton:hover {
+    cursor: pointer;
+}
+
+.materialDownload{
+    display: flex;
+}

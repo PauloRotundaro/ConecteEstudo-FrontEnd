@@ -1,0 +1,24 @@
+.teacherFrequencyContainer {
+    justify-content: center;
+    background-color: #F6F4FF;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+}
+
+.confirmListButton {
+    background-color: #482BD9;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    width: 15%;
+    height: 40px;
+    margin-top: 30px;
+}
