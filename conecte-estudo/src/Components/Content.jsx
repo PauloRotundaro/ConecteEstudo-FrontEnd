@@ -14,8 +14,8 @@ import ClassDetails from "./ClassDetails";
 const Content = () => (
     <main className="Content">
       <Switch>
-        <Route path="/" exact component={Home} />
         <Route path="/login" exact component={LoginPage} />
+        <Route path="/" exact component={Home} />
         <Route path="/class-materials" exact component={ClassMaterials} />
         <Route path="/registered-classes" exact component={RegisteredClasses} />
         <Route path="/classworks" exact component={ClassWorks} />

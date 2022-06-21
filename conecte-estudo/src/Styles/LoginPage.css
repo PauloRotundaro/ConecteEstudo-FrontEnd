@@ -1,4 +1,4 @@
-a{
+a {
   text-decoration: none;
 }
 
@@ -15,7 +15,7 @@ a{
   margin-top: -50px;
 }
 
-.formInput{
+.formInput {
   border: 2px solid #D8D0FF;
   height: 26px;
   padding: 0 10px;
@@ -42,6 +42,16 @@ a{
 .leftContainer {
   height: 100%;
   width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageContainer {
+  background-image: url("../Images/loginImage.png");
+  background-repeat: no-repeat;
+  width: 70%;
+  height: 70%;
 }
 
 .lineBox {
@@ -50,7 +60,7 @@ a{
   margin-top: 30px;
 }
 
-.loginButton{
+.loginButton {
   margin: 25px 0 20px;
   background-color: #482BD9;
   color: #FFF;
@@ -72,20 +82,20 @@ a{
   width: 100%;
 }
 
-.mainContainer{
+.mainContainer {
   width: 70%;
 }
 
-.passRule{
+.passRule {
   font-size: 11px;
   margin: -18px 0 20px;
   color: #757575;
   text-align: start;
 }
 
-.register{
+.register {
   text-align: start;
-  color:#424242;
+  color: #424242;
   font-size: 13px;
 }
 
@@ -95,4 +105,8 @@ a{
   width: 50%;
   border-left: 1px solid #c4c4c4;
   justify-content: center;
+}
+
+.hide{
+  display: none;
 }
