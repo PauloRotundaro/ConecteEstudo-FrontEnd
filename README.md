@@ -1,18 +1,20 @@
 <h1 align="center"> Conecte Estudo: Plataforma Web para Auxílio no Ensino à Distância</h1>
-<h2 align="center"> Projeto desenvolvido para o Trabalho de Conclusão de Curso (TCC) de alunos do 10º período de Engenharia da Computação pelo <a href="https://inatel.br/home/">INATEL</a></h2>
+
+Projeto desenvolvido para o **Trabalho de Conclusão de Curso (TCC)** de alunos do 10º período de Engenharia da Computação pelo **<a href="https://inatel.br/home/">INATEL</a>**, orientado pelo **Prof. Me. Marcelo Vinícius Cysneiros Aragão**
 
 ## Quer ir direto ao ponto? 🔖
 
 - [O Projeto](#o-projeto-)
 - [Equipe](#equipe)
-- [Instalação](#instalação)
+- [Instalação e Compilação](#instalação-e-compilação)
    - [Pré-requisitos](#pré-requisitos)
-   - [Vídeos tutoriais(Para facilitar)](#para-facilitar)
 
 # O Projeto 📈
 ![Standard Collection 12](https://user-images.githubusercontent.com/85133838/174929187-ba4db727-4c54-4e79-8d75-ac1e4106c6d3.png)
 
-Esse projeto contém uma <a href="https://www.redhat.com/pt-br/topics/api/what-is-a-rest-api">API REST</a>, desenvolvida usando <a href="https://www.djangoproject.com/">Django Framework</a> para conectar a aplicação web que foi desenvolvida em <a href="https://pt-br.reactjs.org/">React</a>. E como banco de dados foi utilizado o <a href="https://www.mongodb.com/">MongoDB</a>.
+Conecte Estudo é uma aplicação web para ajudar no ensino à distância e inclui uma agenda virtual de cada usuário. Para o aluno, é possível controlar seu cronograma, ver e adicionar novas tarefas de uma forma prática. Para o professor é possível criar aulas com turmas, criar tarefas para os alunos, planos de ensino e disponibilizar material de aula. Além disso é possível controlar seu próprio cronograma com tarefas do dia a dia. 
+
+O presente repositório, contém o front-end da aplicação, construído em React juntamente com Bootstrap
 
 # Equipe
 * 👧 Ana Luiza Terra
@@ -20,7 +22,7 @@ Esse projeto contém uma <a href="https://www.redhat.com/pt-br/topics/api/what-i
 * 👦 Paulo Rotundaro
 * 👦 Pedro Abritta
 
-# Instalação
+# Instalação e Compilação
 
 ⚙️ O <a href="https://pt-br.reactjs.org/">React</a> é uma biblioteca <a href="https://https://javascript.com/">JavaScript</a> de software livre usada para criar interfaces do usuário de front-end.
 
@@ -36,8 +38,9 @@ Mas não se preocupe, o processo de instalação é simples, e vamos te passar o
 ### Pré-requisitos
 ![image](https://user-images.githubusercontent.com/85133838/174918108-cb84d160-d0d2-4515-aa0c-3cfb5443f001.png)
 
+### ⚠️ Para conseguir concluir os passos a seguir, você precisará ter o Node instalado em sua máquina ⚠️
 
-#### Para fazer o download do Node.js, <a href="https://nodejs.org/en/">clique aqui</a>.
+* Para fazer o download do Node.js, <a href="https://nodejs.org/en/download/">clique aqui</a>.
 
 ### Para verificar a versão instalada, execute o comando abaixo em um terminal
 ```
@@ -53,16 +56,15 @@ O NPM é o gerenciador de pacotes do Node que vem junto em sua instalação. Par
 npm --version
 ```
 
+### Compilar o projeto
+Para compilar o projeto e conferir se tudo está ok, execute o seguinte comando:
+```
+npm build
+```
+
 ### Inicie seu novo aplicativo React
 Esse comando iniciará o servidor do Node.js e iniciará uma nova janela do navegador exibindo seu aplicativo:
 ```
 npm start
 ```
-
-
-### **Para facilitar**
-Abaixo, seguem links de dois vídeos, feitos pelo monitor Leonardo de Souza da matéria de Engenharia de Software do ***Inatel - Instituto Nacional de Telecomunicações*** explicando o processo de instalação do Flutter no Windows e configurando o dispositivo móvel para rodar a aplicação.
-
-* <a href="https://www.youtube.com/watch?v=xC14BiwajWI">Instalação do Flutter no Windows</a>
-* <a href="https://www.youtube.com/watch?v=x7gU01USeis">Como usar o seu celular no desenvolvimento Flutter</a>
 
