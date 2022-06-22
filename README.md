@@ -59,7 +59,7 @@ npm --version
 ### Compilar o projeto
 Para compilar o projeto e conferir se tudo está ok, execute o seguinte comando:
 ```
-npm build
+npm run build
 ```
 
 ### Inicie seu novo aplicativo React
