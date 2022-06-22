@@ -77,20 +77,6 @@ export default class LoginPage extends Component {
   loginSubmit = event => {
     event.preventDefault();
 
-    const getUser = async () => {
-      var config = {
-        method: 'get',
-        url: 'http://127.0.0.1:8000/userEmail',
-        headers: {
-          'email': this.state.userEmail
-        }
-      };
-      const response = await axios(config)
-        .then(function (response) {
-          localStorage.setItem('user', JSON.stringify(response.data));
-        });
-    };
-
     const user = {
       email: this.state.userEmail,
       password: this.state.userPassword,
@@ -103,11 +89,21 @@ export default class LoginPage extends Component {
 
         axios.post(`http://127.0.0.1:8000/auth/jwt/verify/`, { token: res.data.access })
           .then(res => {
-            getUser();
+            var config = {
+              method: 'get',
+              url: 'http://127.0.0.1:8000/userEmail',
+              headers: {
+                'email': this.state.userEmail
+              }
+            };
+            axios(config)
+              .then(function (response) {
+                localStorage.setItem('user', JSON.stringify(response.data));
+              })
+              .then(res => {
+                window.location.replace("/")
+              });
           })
-        // .then(
-        //   window.location.replace("/")
-        // );
 
       })
   }
