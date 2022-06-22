@@ -1,7 +1,8 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import "../../Styles/Home.css";
+import { React, Component } from 'react';
+import axios from 'axios';
 
 const style = {
   position: 'absolute',
@@ -18,79 +19,109 @@ const style = {
   border: 'none'
 };
 
-// function ChildModal() {
-//   const [open, setOpen] = React.useState(false);
-//   const handleOpen = () => {
-//     setOpen(true);
-//   };
-//   const handleClose = () => {
-//     setOpen(false);
-//   };
+export class AddEvent extends Component {
+  state = {
+    title: '',
+    eventHour: '',
+    eventDate: '',
+    description: '',
+    open: false
+  }
 
-//   return (
-//     <React.Fragment>
-//       <Button onClick={handleOpen}>Open Child Modal</Button>
-//       <Modal
-//         hideBackdrop
-//         open={open}
-//         onClose={handleClose}
-//         aria-labelledby="child-modal-title"
-//         aria-describedby="child-modal-description"
-//       >
-//         <Box sx={{ ...style, width: 200 }}>
-//           <h2 id="child-modal-title">Text in a child modal</h2>
-//           <p id="child-modal-description">
-//             Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-//           </p>
-//           <Button onClick={handleClose}>Close Child Modal</Button>
-//         </Box>
-//       </Modal>
-//     </React.Fragment>
-//   );
-// }
+  setOpen = (value) => {
+    this.setState({ open: value });
+  }
 
-export default function NestedModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
+  handleOpen = () => {
+    this.setOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
+  handleClose = () => {
+    this.setOpen(false);
   };
 
-  return (
-    <div>
-      <div className="buttonContainer">
-        <button className="addEventButton" onClick={handleOpen}>Adicionar um evento</button>
+  titleChange = event => {
+    this.setState({ title: event.target.value });
+  }
+
+  descriptionChange = event => {
+    this.setState({ description: event.target.value });
+  }
+
+  eventHourChange = event => {
+    this.setState({ eventHour: event.target.value });
+  }
+
+  eventDateChange = event => {
+    this.setState({ eventDate: event.target.value });
+  }
+
+  postEvent = event => {
+    event.preventDefault();
+    let today = new Date();
+    const date = this.state.eventDate;
+    const [day, month, year] = date.split('/');
+    const result = [year, month, day].join('');
+    const dateofEvent = result + "T" + this.state.eventHour;
+
+    const userEvent = {
+      eventType: 1,
+      classId: 0,
+      teacherName: 'null',
+      title: this.state.title,
+      description: this.state.description,
+      dateOfEvent: dateofEvent,
+      createdAt: today.toISOString().split('T')[0],
+      updatedAt: today.toISOString().split('T')[0],
+      updatedBy: 40,
+      status: "active",
+      user: 40
+    };
+
+    axios.post(`http://127.0.0.1:8000/userEvent`, userEvent)
+      .then(res => {
+        window.location.replace("/");
+      })
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="buttonContainer">
+          <button className="addEventButton" onClick={this.handleOpen}>Adicionar um evento</button>
+        </div>
+        <Modal
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="parent-modal-title"
+          aria-describedby="parent-modal-description"
+        >
+          <Box sx={{ ...style, width: 800 }}>
+            <h2 className='modalTitle'>Adicionar um evento</h2>
+            <form onSubmit={this.postEvent} className='addEventModalContainer'>
+              <div className='modalSection'>
+                <span className='modalSectionTitle'>Título do evento</span>
+                <textarea name='title' className='modalSectionTextarea' onChange={this.titleChange} rows={"1"} />
+              </div>
+              <div className='modalSection'>
+                <span className='modalSectionTitle'>Descrição</span>
+                <textarea name='description' className='modalSectionTextarea' onChange={this.descriptionChange} rows={"1"} />
+              </div>
+              <div className='modalSection'>
+                <span className='modalSectionTitle'>Horário do evento</span>
+                <input name="eventHour" className='modalSectionInput' onChange={this.eventHourChange} type={'time'} />
+              </div>
+              <div className='modalSection'>
+                <span className='modalSectionTitle'>Data do evento</span>
+                <input className='modalSectionInput' name="eventDate" onChange={this.eventDateChange} type={'date'} />
+              </div>
+              <div className='modalButtonContainer'>
+                <button className="cancelAddEventButton" onClick={this.handleClose}>Cancelar</button>
+                <button className="addEventButton" type="postEvent">Adicionar</button>
+              </div>
+            </form>
+          </Box>
+        </Modal>
       </div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-      >
-        <Box sx={{ ...style, width: 800 }}>
-          <h2 className='modalTitle'>Adicionar um evento</h2>
-          <div className='addEventModalContainer'>
-            <div className='modalSection'>
-              <span className='modalSectionTitle'>Título do evento</span>
-              <textarea className='modalSectionTextarea' rows={"1"}/>
-            </div>
-            <div className='modalSection'>
-              <span className='modalSectionTitle'>Horário do evento</span>
-              <input className='modalSectionInput' type={'time'}/>
-            </div>
-            <div className='modalSection'>
-              <span className='modalSectionTitle'>Data do evento</span>
-              <input className='modalSectionInput' type={'date'}/>
-            </div>
-            <div className='modalButtonContainer'>
-              <button className="cancelAddEventButton" onClick={handleClose}>Cancelar</button>
-              <button className="addEventButton">Adicionar</button>
-            </div>
-          </div>
-        </Box>
-      </Modal>
-    </div>
-  );
+    );
+  }
 }

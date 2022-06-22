@@ -126,7 +126,7 @@ export default class LoginPage extends Component {
                 {/* <label className="passRule">Deve conter no mínimo 8 caracteres</label> */}
               </div>
               <button className="loginButton" type="loginSubmit">Entrar</button>
-              <label className="register">Não possui uma conta? <span onClick={this.changeToCreate}>Clique aqui e cadastre-se</span></label>
+              <label className="register">Não possui uma conta? <span onClick={this.changeToCreate} className="cursor-pointer">Clique aqui e cadastre-se</span></label>
             </form>
             {/* ------------------------------------------------------------------------------------------ */}
             <form className="formContainer hide" id="createUserForm" onSubmit={this.createUserSubmit}>
@@ -148,7 +148,7 @@ export default class LoginPage extends Component {
                 </div>
               </div>
               <button type="createUserSubmit" className="loginButton">Cadastrar</button>
-              <label className="register">Já possui uma conta? <span onClick={this.changeToLogin}>Faça login</span></label>
+              <label className="register">Já possui uma conta? <span onClick={this.changeToLogin} className="cursor-pointer">Faça login</span></label>
             </form>
           </div>
         </div>
