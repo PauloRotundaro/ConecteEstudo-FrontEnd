@@ -70,6 +70,7 @@ export default class LoginPage extends Component {
       .then(res => {
         console.log(res);
         console.log(res.data);
+        localStorage.setItem('user', JSON.stringify(res.data));
       })
   }
 
@@ -83,10 +84,27 @@ export default class LoginPage extends Component {
 
     axios.post(`http://127.0.0.1:8000/auth/jwt/create/`, user)
       .then(res => {
+        localStorage.setItem('access', res.data.access);
+        localStorage.setItem('refresh', res.data.refresh);
+
         axios.post(`http://127.0.0.1:8000/auth/jwt/verify/`, { token: res.data.access })
-          .then(res =>
-            window.location.replace("/")
-          );
+          .then(res => {
+            var config = {
+              method: 'get',
+              url: 'http://127.0.0.1:8000/userEmail',
+              headers: {
+                'email': this.state.userEmail
+              }
+            };
+            axios(config)
+              .then(function (response) {
+                localStorage.setItem('user', JSON.stringify(response.data));
+              })
+              .then(res => {
+                window.location.replace("/")
+              });
+          })
+
       })
   }
 
