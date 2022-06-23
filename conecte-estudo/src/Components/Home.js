@@ -22,6 +22,8 @@ export default class Home extends Component {
     var dayNumber = newDate.getDate();
     var month = newDate.getMonth();
     var year = newDate.getFullYear();
+    const userdata = JSON.parse(localStorage.getItem('user'));
+    const userId = userdata[0].userId;
 
     if (today === 0) today = "Domingo"
     else if (today === 1) today = "Segunda-feira"
@@ -48,7 +50,7 @@ export default class Home extends Component {
     this.setState({ day: today });
     this.setState({ month });
 
-    axios.get(`http://127.0.0.1:8000/userEvent/40`)
+    axios.get(`http://127.0.0.1:8000/userEvent/` + userId)
       .then(res => {
         const events = res.data;
         this.setState({ events });
@@ -111,7 +113,13 @@ export default class Home extends Component {
                 <th className="hour">10:00</th>
                 <th className="eventContainer"></th>
                 <th className="eventContainer"></th>
-                <th className="eventContainer"></th>
+                <th className="eventContainer">
+                  <div className="eventCard">
+                    <span className="eventTitle">Aula de inglês</span>
+                    <span className="eventTime">Módulo XIII</span>
+                    <span className="eventTime"></span>
+                  </div>
+                </th>
                 <th className="eventContainer"></th>
                 <th className="eventContainer"></th>
                 <th className="eventContainer"></th>
@@ -139,7 +147,13 @@ export default class Home extends Component {
               </tr>
               <tr className="weeklyEvents">
                 <th className="hour">13:00</th>
-                <th className="eventContainer"></th>
+                <th className="eventContainer">
+                  <div className="eventCard">
+                    <span className="eventTitle">Aula de violão</span>
+                    <span className="eventTime">Primeira aula (levar violão)</span>
+                    <span className="eventTime"></span>
+                  </div>
+                </th>
                 <th className="eventContainer"></th>
                 <th className="eventContainer"></th>
                 <th className="eventContainer"></th>

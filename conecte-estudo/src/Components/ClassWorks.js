@@ -2,21 +2,31 @@ import React, { Component } from "react";
 import Header from "./Header";
 import "../Styles/ClassWorks.css";
 import axios from "axios";
-import { Assignment } from "@mui/icons-material";
-
 export default class ClassWorks extends Component {
 
   state = {
+    userId: 0,
+    classId: 0,
     assignments: []
   }
 
   componentDidMount() {
-    axios.get(`http://127.0.0.1:8000/classAssignment/1`)
+    const userdata = JSON.parse(localStorage.getItem('user'));
+    const userId = userdata[0].userId;
+    this.setState({ userId });
+
+    const { classId } = this.props.match.params;
+    this.setState({ classId });
+
+    axios.get(`http://127.0.0.1:8000/classAssignment/` + classId)
       .then(res => {
         const assignments = res.data;
-        console.log(assignments);
         this.setState({ assignments });
-      })
+      });
+  }
+
+  toWorkDetails = (assignmentId) => {
+    window.location.replace('/work-details/' + assignmentId)
   }
 
   render() {
@@ -25,12 +35,12 @@ export default class ClassWorks extends Component {
         <Header />
         <div className="outerContainer">
           <div className="classWorkstitleContainer">
-            <span className="title">Trabalhos de C202</span>
+            <span className="title">Trabalhos da turma {this.state.classId}</span>
           </div>
           <div className="worksContainer">
             {
               this.state.assignments.map(assignment =>
-                assignment.user == 40 ? <div key={assignment.assignmentId} className="workCard"><span className="workTitle">{assignment.title}</span><span className="workClassName">C202 - A (2022/1)</span></div> : <div key={assignment.assignmentId}></div>
+                assignment.user === this.state.userId ? <div key={assignment.assignmentId} onClick={event => this.toWorkDetails(assignment.assignmentId)} className="workCard"><span className="workTitle">{assignment.title}</span><span className="workClassName">C202 - A (2022/1)</span></div> : <div key={assignment.assignmentId}></div>
               )
             }
           </div>

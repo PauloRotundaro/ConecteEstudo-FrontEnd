@@ -57,11 +57,12 @@ export class AddEvent extends Component {
 
   postEvent = event => {
     event.preventDefault();
+    const userdata = JSON.parse(localStorage.getItem('user'));
+    const userId = userdata[0].userId;
     let today = new Date();
     const date = this.state.eventDate;
     const [day, month, year] = date.split('/');
     const result = [year, month, day].join('');
-    const dateofEvent = result + "T" + this.state.eventHour;
 
     const userEvent = {
       eventType: 1,
@@ -69,12 +70,13 @@ export class AddEvent extends Component {
       teacherName: 'null',
       title: this.state.title,
       description: this.state.description,
-      dateOfEvent: dateofEvent,
+      dateOfEvent: result,
+      timeOfEvent: this.state.eventHour,
       createdAt: today.toISOString().split('T')[0],
       updatedAt: today.toISOString().split('T')[0],
-      updatedBy: 40,
+      updatedBy: userId,
       status: "active",
-      user: 40
+      user: userId
     };
 
     axios.post(`http://127.0.0.1:8000/userEvent`, userEvent)

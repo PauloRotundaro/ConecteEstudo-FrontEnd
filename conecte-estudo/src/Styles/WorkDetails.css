@@ -67,7 +67,8 @@
 }
 
 .submitWorkButton:hover {
-    cursor: pointer;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .materialDownload{
