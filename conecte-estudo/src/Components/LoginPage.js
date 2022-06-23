@@ -68,8 +68,6 @@ export default class LoginPage extends Component {
 
     axios.post(`http://127.0.0.1:8000/user`, user)
       .then(res => {
-        console.log(res);
-        console.log(res.data);
         localStorage.setItem('user', JSON.stringify(res.data));
       })
   }
@@ -99,8 +97,6 @@ export default class LoginPage extends Component {
             axios(config)
               .then(function (response) {
                 localStorage.setItem('user', JSON.stringify(response.data));
-              })
-              .then(res => {
                 window.location.replace("/")
               });
           })

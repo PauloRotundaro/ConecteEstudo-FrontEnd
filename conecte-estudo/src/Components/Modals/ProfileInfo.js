@@ -40,7 +40,10 @@ export default class ProfileInfo extends Component {
     };
 
     componentDidMount() {
-        axios.get(`http://127.0.0.1:8000/user/40`)
+        const userdata = JSON.parse(localStorage.getItem('user'));
+        const userId = userdata[0].userId;
+
+        axios.get(`http://127.0.0.1:8000/user/`+ userId)
             .then(res => {
                 const user = res.data[0];
                 const birthdate = user.birthdate.substring(0, 10);
@@ -63,7 +66,7 @@ export default class ProfileInfo extends Component {
     }
 
     birthdateChange = event => {
-        this.setState({ email: event.target.value });
+        this.setState({ birthdate: event.target.value });
     }
 
     phoneChange = event => {
@@ -72,11 +75,13 @@ export default class ProfileInfo extends Component {
 
     editProfileInfo = event => {
         event.preventDefault();
+        const userdata = JSON.parse(localStorage.getItem('user'));
+        const userId = userdata[0].userId;
 
         let today = new Date();
 
         const user = {
-            userId: 40,
+            userId: userId,
             userName: this.state.userName,
             email: this.state.email,
             password: this.state.user.password,
@@ -86,11 +91,9 @@ export default class ProfileInfo extends Component {
             createdAt: this.state.user.createdAt,
             updatedAt: today.toISOString().split('T')[0]
         };
-        console.log(user);
 
         axios.put(`http://127.0.0.1:8000/user`, user)
             .then(res => {
-                console.log(res.data);
                 window.location.replace("/");
             })
     }

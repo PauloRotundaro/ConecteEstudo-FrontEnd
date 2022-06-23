@@ -16,14 +16,14 @@ const Content = () => (
       <Switch>
         <Route path="/login" exact component={LoginPage} />
         <Route path="/" exact component={Home} />
-        <Route path="/class-materials" exact component={ClassMaterials} />
+        <Route path="/class-materials/:classId" exact component={ClassMaterials} />
         <Route path="/registered-classes" exact component={RegisteredClasses} />
-        <Route path="/classworks" exact component={ClassWorks} />
-        <Route path="/work-details" exact component={WorkDetails} />
+        <Route path="/classworks/:classId" exact component={ClassWorks} />
+        <Route path="/work-details/:workId" exact component={WorkDetails} />
         <Route path="/teaching-plan" exact component={TeachingPlan} />
-        <Route path="/frequency" exact component={Frequency} />
-        <Route path="/class-frequency" exact component={TeacherFrequency} />
-        <Route path="/class-details" exact component={ClassDetails} />
+        <Route path="/frequency/:classId" exact component={Frequency} />
+        <Route path="/class-frequency/:classId" exact component={TeacherFrequency} />
+        <Route path="/class-details/:classId" exact component={ClassDetails} />
       </Switch>
     </main>
   );

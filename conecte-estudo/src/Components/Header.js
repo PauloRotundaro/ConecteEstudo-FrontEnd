@@ -5,6 +5,17 @@ import { ButtonGroup } from "react-bootstrap";
 import ProfileInfo from "../Components/Modals/ProfileInfo.js";
 
 export default class Header extends Component {
+
+  state = {
+    userName: ''
+  }
+
+  componentDidMount() {
+    const userdata = JSON.parse(localStorage.getItem('user'))
+    const firstName = userdata[0].userName.split(' ')[0];
+    this.setState({userName: firstName});
+  }
+
   render() {
     return (
       <div className="headerContainer flexContainer">
@@ -23,7 +34,7 @@ export default class Header extends Component {
         </div>
         <div className="userContainer textShadow flexContainer">
           {/* <img alt="icon" className="userIcon" src={cookerIcon} /> */}
-          <div className="fontStyle">Olá, Marcelo!</div>
+          <div className="fontStyle">Olá, {this.state.userName}!</div>
         </div>
       </div>
     );
