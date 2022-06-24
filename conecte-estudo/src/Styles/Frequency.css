@@ -81,6 +81,7 @@
 
 .classWorkButtonContainer{
     display: flex;
-    width: 80%;
+    flex-direction: column;
+    width: 25%;
     justify-content: start;
 }
