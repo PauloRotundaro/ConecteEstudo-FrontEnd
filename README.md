@@ -1,6 +1,6 @@
 <h1 align="center"> Conecte Estudo: Plataforma Web para Auxílio no Ensino à Distância</h1>
 
-<h3>Projeto desenvolvido para o Trabalho de Conclusão de Curso (TCC) de alunos do 10º período de Engenharia da Computação pelo <a href="https://inatel.br/home/">INATEL</a>, orientado pelo Prof. Me. Marcelo Vinícius Cysneiros Aragão</h3>
+<h3 align="center">Projeto desenvolvido para o Trabalho de Conclusão de Curso (TCC) de alunos do 10º período de Engenharia da Computação pelo <a href="https://inatel.br/home/">INATEL</a>, orientado pelo Prof. Me. Marcelo Vinícius Cysneiros Aragão</h3>
 
 ## Quer ir direto ao ponto? 🔖
 
