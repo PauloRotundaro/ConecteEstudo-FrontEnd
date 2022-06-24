@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { React, Component } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import "../../Styles/Home.css";
@@ -18,96 +18,107 @@ const style = {
     border: 'none'
 };
 
-export default function NestedModal() {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const changeToDate = event => {
-        localStorage.setItem('assigmentDueDate', event.target.value);
+export default class AddLesson extends Component {
+    state = {
+        title: '',
+        description: '',
+        dueDate: '',
+        open: false
     }
 
-    const changeToDescription = event => {
-        localStorage.setItem('assigmentDescription', event.target.value);
+    setOpen = (value) => {
+        this.setState({ open: value });
     }
 
-    const handleClose = () => {
-        setOpen(false);
+    handleOpen = () => {
+        this.setOpen(true);
+    };
+    handleClose = () => {
+        this.setOpen(false);
     };
 
-    const handleConfirm = () => {
-        const usersInClass = JSON.parse("[" + localStorage.getItem('usersInClass') + "]");
-        console.log(usersInClass);
+    changeTitle = event => {
+        this.setState({ title: event.target.value });
+    }
+
+    changeDueDate = event => {
+        this.setState({ dueDate: event.target.value });
+    }
+
+    changeDescription = event => {
+        this.setState({ description: event.target.value });
+    }
+
+    postEvent = event => {
+        event.preventDefault();
+        const userdata = JSON.parse(localStorage.getItem('user'));
+        const userId = userdata[0].userId;
+
+        const classId = JSON.parse(localStorage.getItem('classId'));
 
         let today = new Date();
 
-        usersInClass.forEach(function (user, index) {
-            console.log(user, index);
-
-            var data = JSON.stringify({
-                "identifier": 1,
-                "title": "Tarefa " + JSON.parse(localStorage.getItem('class'))[0].className,
-                "description": localStorage.getItem('assigmentDescription'),
-                "classId": JSON.parse(localStorage.getItem('class'))[0].classroomId,
-                "createdAt": today.toISOString().split('T')[0],
-                "updatedAt": today.toISOString().split('T')[0],
-                "createdBy": JSON.parse(localStorage.getItem('user'))[0].userId,
-                "updatedBy": JSON.parse(localStorage.getItem('user'))[0].userId,
-                "dueDate": localStorage.getItem('assigmentDueDate'),
-                "deliveredAt": today.toISOString().split('T')[0],
-                "deliveredMaterial": "deliveredMaterial",
-                "score": 0,
-                "attachment": "attachment",
-                "user": user
+        axios.get(`http://127.0.0.1:8000/classroom/` + classId)
+            .then(res => {
+                const users = res.data[0].user;
+                const className = res.data[0].className;
+                this.setState({ className });
+                users.forEach(element => {
+                    const userEvent = {
+                        identifier: 2,
+                        title: this.state.title,
+                        classId: classId,
+                        createdAt: today.toISOString().split('T')[0],
+                        updatedAt: today.toISOString().split('T')[0],
+                        createdBy: userId,
+                        updatedBy: userId,
+                        description: this.state.description,
+                        deliveredAt: '2022-07-13',
+                        dueDate: this.state.dueDate.split('T')[0],
+                        deliveredMaterial: 'string',
+                        score: 0.1,
+                        attachment: "active",
+                        user: element
+                    };
+                    console.log(userEvent)
+                    axios.post(`http://127.0.0.1:8000/assignment`, userEvent)
+                        .then(event => {
+                            console.log(event)
+                        })
+                });
+                this.handleClose(true);
             });
 
-            var config = {
-                method: 'post',
-                url: 'http://127.0.0.1:8000/assignment',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: data
-            };
-
-            axios(config)
-                .then(function (response) {
-                    console.log(JSON.stringify(response.data));
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        });
-
-        setOpen(false);
     };
-
-    return (
-        <div>
-            <button className="classDetailsButton" onClick={handleOpen}>Atribuir atividade</button>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="parent-modal-title"
-                aria-describedby="parent-modal-description"
-            >
-                <Box sx={{ ...style, width: 800 }}>
-                    <h2 className='modalTitle'>Atribuir atividade</h2>
-                    <div className='addWorkModalContainer'>
-                        <span className='addWorkSectionTitle'>Vencimento:</span>
-                        <input className='duedate' type={"datetime-local"} onChange={changeToDate} />
-                        <span className='addWorkSectionTitle'>Descrição</span>
-                        <textarea className='addWorkDescription' rows={4} onChange={changeToDescription} />
-                        <span className='addWorkSectionTitle'>Material de referência</span>
-                        <input className='addWorkFile' type={"file"} />
-                    </div>
-                    <div className='modalButtonContainer'>
-                        <button className="cancelAddEventButton" onClick={handleClose}>Cancelar</button>
-                        <button className="addEventButton" onClick={handleConfirm}>Confirmar</button>
-                    </div>
-                </Box>
-            </Modal>
-        </div>
-    );
+    render() {
+        return (
+            <div>
+                <button className="classDetailsButton" onClick={this.handleOpen}>Atribuir atividade</button>
+                <Modal
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="parent-modal-title"
+                    aria-describedby="parent-modal-description"
+                >
+                    <Box sx={{ ...style, width: 800 }}>
+                        <h2 className='modalTitle'>Atribuir atividade</h2>
+                        <div className='addWorkModalContainer'>
+                            <span className='addWorkSectionTitle'>Título</span>
+                            <input name='title' className='addWorkDescription' type={"text"} onChange={this.changeTitle} />
+                            <span className='addWorkSectionTitle'>Vencimento:</span>
+                            <input name='dueDate' className='duedate' type={"datetime-local"} onChange={this.changeDueDate} />
+                            <span className='addWorkSectionTitle'>Descrição</span>
+                            <textarea name='description' className='addWorkDescription' rows={4} onChange={this.changeDescription} />
+                            <span className='addWorkSectionTitle'>Material de referência</span>
+                            <input name='attachment' className='addWorkFile' type={"file"} />
+                        </div>
+                        <div className='modalButtonContainer'>
+                            <button className="cancelAddEventButton" onClick={this.handleClose}>Cancelar</button>
+                            <button className="addEventButton" onClick={this.postEvent}>Confirmar</button>
+                        </div>
+                    </Box>
+                </Modal>
+            </div>
+        );
+    }
 }

@@ -27,7 +27,7 @@ export default class Header extends Component {
             <Dropdown.Menu className="dropdownMenu">
               <Dropdown.Item className="dropdownItem bb-c2"><ProfileInfo/></Dropdown.Item>
               <Dropdown.Item href="/registered-classes" className="dropdownItem bb-c2">Turmas</Dropdown.Item>
-              <Dropdown.Item href="/class-materials" className="dropdownItem bb-c2">Materiais de aula</Dropdown.Item>
+              {/* <Dropdown.Item href="/class-materials" className="dropdownItem bb-c2">Materiais de aula</Dropdown.Item> */}
               <Dropdown.Item className="dropdownItem">Sair</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

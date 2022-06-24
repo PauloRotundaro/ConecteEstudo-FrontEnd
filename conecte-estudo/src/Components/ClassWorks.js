@@ -7,7 +7,8 @@ export default class ClassWorks extends Component {
   state = {
     userId: 0,
     classId: 0,
-    assignments: []
+    assignments: [],
+    classRoomName: ''
   }
 
   componentDidMount() {
@@ -22,6 +23,9 @@ export default class ClassWorks extends Component {
       .then(res => {
         const assignments = res.data;
         this.setState({ assignments });
+        axios.get(`http://127.0.0.1:8000/classroom/` + classId).then(res => {
+          this.setState({ classRoomName: res.data[0].className })
+        })
       });
   }
 
@@ -35,7 +39,7 @@ export default class ClassWorks extends Component {
         <Header />
         <div className="outerContainer">
           <div className="classWorkstitleContainer">
-            <span className="title">Trabalhos da turma {this.state.classId}</span>
+            <span className="title">Trabalhos {this.state.classRoomName}</span>
           </div>
           <div className="worksContainer">
             {
