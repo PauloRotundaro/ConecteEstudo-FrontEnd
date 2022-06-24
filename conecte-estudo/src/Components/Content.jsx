@@ -20,7 +20,7 @@ const Content = () => (
         <Route path="/registered-classes" exact component={RegisteredClasses} />
         <Route path="/classworks/:classId" exact component={ClassWorks} />
         <Route path="/work-details/:workId" exact component={WorkDetails} />
-        <Route path="/teaching-plan" exact component={TeachingPlan} />
+        <Route path="/teaching-plan/:classId" exact component={TeachingPlan} />
         <Route path="/frequency/:classId" exact component={Frequency} />
         <Route path="/class-frequency/:classId" exact component={TeacherFrequency} />
         <Route path="/class-details/:classId" exact component={ClassDetails} />
