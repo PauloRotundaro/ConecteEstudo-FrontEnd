@@ -21,7 +21,6 @@ export default class Home extends Component {
     var today = newDate.getDay();
     var dayNumber = newDate.getDate();
     var month = newDate.getMonth();
-    var year = newDate.getFullYear();
     const userdata = JSON.parse(localStorage.getItem('user'));
     const userId = userdata[0].userId;
 
@@ -88,7 +87,7 @@ export default class Home extends Component {
                       <div className="eventCard">
                         <span className="eventTitle">{event.title}</span>
                         <span className="eventTime">{event.description}</span>
-                        <span className="eventTime">{event.teacherName == "null" ? '' : 'Professor ' + event.teacherName}</span>
+                        <span className="eventTime">{event.teacherName === "null" ? '' : 'Professor ' + event.teacherName}</span>
                       </div>
                     </th>
                   )
