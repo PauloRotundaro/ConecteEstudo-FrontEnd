@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { React, Component } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import "../../Styles/Home.css";
@@ -18,100 +18,137 @@ const style = {
     border: 'none'
 };
 
-export default function NestedModal() {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const changeToDate = event => {
-        localStorage.setItem('newEventDate', event.target.value);
+export default class AddLesson extends Component {
+    state = {
+        title: '',
+        eventHour: '',
+        eventDate: '',
+        description: '',
+        open: false
     }
 
-    const changeToTime = event => {
-        localStorage.setItem('newEventTime', event.target.value);
+    setOpen = (value) => {
+        this.setState({ open: value });
     }
 
-    const handleClose = () => {
-        setOpen(false);
+    handleOpen = () => {
+        this.setOpen(true);
+    };
+    handleClose = () => {
+        this.setOpen(false);
     };
 
-    const handleConfirm = () => {
-        const usersInClass = JSON.parse("[" + localStorage.getItem('usersInClass') + "]");
-        console.log(usersInClass);
+    titleChange = event => {
+        this.setState({ title: event.target.value });
+    }
+
+    descriptionChange = event => {
+        this.setState({ description: event.target.value });
+    }
+
+    eventHourChange = event => {
+        this.setState({ eventHour: event.target.value });
+    }
+
+    eventDateChange = event => {
+        this.setState({ eventDate: event.target.value });
+    }
+
+    postEvent = event => {
+        event.preventDefault();
+        const userdata = JSON.parse(localStorage.getItem('user'));
+        const userId = userdata[0].userId;
+
+        const classId = JSON.parse(localStorage.getItem('classId'));
 
         let today = new Date();
+        const date = this.state.eventDate;
+        const [day, month, year] = date.split('/');
+        const result = [year, month, day].join('');
 
-        usersInClass.forEach(function (user, index) {
-            console.log(user, index);
+        const userEvent = {
+            eventType: 2,
+            classId: classId,
+            teacherName: userdata[0].userName,
+            title: this.state.title,
+            description: this.state.description,
+            dateOfEvent: result,
+            timeOfEvent: this.state.eventHour,
+            createdAt: today.toISOString().split('T')[0],
+            updatedAt: today.toISOString().split('T')[0],
+            updatedBy: userId,
+            status: "active",
+            user: userId
+        };
+        axios.post(`http://127.0.0.1:8000/userEvent`, userEvent)
+            .then(event => {
+                axios.get(`http://127.0.0.1:8000/classroom/` + classId)
+                    .then(res => {
+                        const users = res.data[0].user;
+                        const className = res.data[0].className;
+                        this.setState({ className });
+                        users.forEach(element => {
+                            const userEvent = {
+                                eventType: 2,
+                                classId: classId,
+                                teacherName: 'null',
+                                title: this.state.title,
+                                description: this.state.description,
+                                dateOfEvent: result,
+                                timeOfEvent: this.state.eventHour,
+                                createdAt: today.toISOString().split('T')[0],
+                                updatedAt: today.toISOString().split('T')[0],
+                                updatedBy: userId,
+                                status: "active",
+                                user: element
+                            };
+                            axios.post(`http://127.0.0.1:8000/userEvent`, userEvent)
+                                .then(event => {
+                                })
+                        });
+                    });
+            })
 
-            var data = JSON.stringify({
-                "eventType": 2,
-                "classId": JSON.parse(localStorage.getItem('class'))[0].classroomId,
-                "teacherName": JSON.parse(localStorage.getItem('user'))[0].userName,
-                "title": "Aula " + JSON.parse(localStorage.getItem('class'))[0].className,
-                "description": "Descrição " + JSON.parse(localStorage.getItem('class'))[0].className,
-                "dateOfEvent": localStorage.getItem('newEventDate'),
-                "timeOfEvent": localStorage.getItem('newEventTime'),
-                "createdAt": today.toISOString().split('T')[0],
-                "updatedAt": today.toISOString().split('T')[0],
-                "updatedBy": JSON.parse(localStorage.getItem('user'))[0].userId,
-                "status": "active",
-                "user": user
-            });
+    }
 
-            var config = {
-                method: 'post',
-                url: 'http://127.0.0.1:8000/userEvent',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: data
-            };
+    render() {
 
-            axios(config)
-                .then(function (response) {
-                    console.log(JSON.stringify(response.data));
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        });
-
-        setOpen(false);
-    };
-
-    return (
-        <div>
-            <button className="classDetailsButton" onClick={handleOpen}>Agendar aula</button>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="parent-modal-title"
-                aria-describedby="parent-modal-description"
-            >
-                <Box sx={{ ...style, width: 800 }}>
-                    <h2 className='modalTitle'>Agendar aula</h2>
-                    <div className='addEventModalContainer'>
-                        <div className='modalSection'>
-                            <span className='modalSectionTitle'>Disciplina</span>
-                            <textarea className='modalSectionTextarea' rows={"1"} />
+        return (
+            <div>
+                <button className="classDetailsButton" onClick={this.handleOpen}>Agendar aula</button>
+                <Modal
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="parent-modal-title"
+                    aria-describedby="parent-modal-description"
+                >
+                    <Box sx={{ ...style, width: 800 }}>
+                        <h2 className='modalTitle'>Agendar aula</h2>
+                        <div className='addEventModalContainer'>
+                            <div className='modalSection'>
+                                <span className='modalSectionTitle'>Titulo</span>
+                                <textarea name={"title"} className='modalSectionTextarea' onChange={this.titleChange} rows={1} />
+                            </div>
+                            <div className='modalSection'>
+                                <span className='modalSectionTitle'>Descrição</span>
+                                <textarea name={"description"} className='modalSectionInput' rows={4} onChange={this.descriptionChange} />
+                            </div>
+                            <div className='modalSection'>
+                                <span className='modalSectionTitle'>Data</span>
+                                <input name={"dateTime"} className='modalSectionInput' type={"date"} onChange={this.eventDateChange} />
+                            </div>
+                            <div className='modalSection'>
+                                <span className='modalSectionTitle'>Horário</span>
+                                <input name={"dateHour"} className='modalSectionInput' type={"time"} onChange={this.eventHourChange} />
+                            </div>
+                            <div className='modalButtonContainer'>
+                                <button className="cancelAddEventButton" onClick={this.handleClose}>Cancelar</button>
+                                <button className="addEventButton" onClick={this.postEvent} >Adicionar</button>
+                            </div>
                         </div>
-                        <div className='modalSection'>
-                            <span className='modalSectionTitle'>Data</span>
-                            <input className='modalSectionInput' type={"date"} onChange={changeToDate} />
-                        </div>
-                        <div className='modalSection'>
-                            <span className='modalSectionTitle'>Horário</span>
-                            <input className='modalSectionInput' type={"time"} onChange={changeToTime} />
-                        </div>
-                        <div className='modalButtonContainer'>
-                            <button className="cancelAddEventButton" onClick={handleClose}>Cancelar</button>
-                            <button className="addEventButton" onClick={handleConfirm} >Adicionar</button>
-                        </div>
-                    </div>
-                </Box>
-            </Modal>
-        </div>
-    );
+                    </Box>
+                </Modal>
+            </div >
+        );
+    }
 }
